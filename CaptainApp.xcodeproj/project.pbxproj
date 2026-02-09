@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CEEA01692F396F22000523D4 /* CaptainAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01682F396F22000523D4 /* CaptainAppApp.swift */; };
+		CEEA016B2F396F22000523D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA016A2F396F22000523D4 /* ContentView.swift */; };
+		CEEA016D2F396F29000523D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEA016C2F396F29000523D4 /* Assets.xcassets */; };
+		CEEA01702F396F29000523D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEA016F2F396F29000523D4 /* Preview Assets.xcassets */; };
+		CEEA017A2F396F2A000523D4 /* CaptainAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01792F396F2A000523D4 /* CaptainAppTests.swift */; };
+		CEEA01842F396F2A000523D4 /* CaptainAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01832F396F2A000523D4 /* CaptainAppUITests.swift */; };
+		CEEA01862F396F2A000523D4 /* CaptainAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01852F396F2A000523D4 /* CaptainAppUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CEEA01762F396F2A000523D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEEA015D2F396F22000523D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEEA01642F396F22000523D4;
+			remoteInfo = CaptainApp;
+		};
+		CEEA01802F396F2A000523D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEEA015D2F396F22000523D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEEA01642F396F22000523D4;
+			remoteInfo = CaptainApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CEEA01652F396F22000523D4 /* CaptainApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaptainApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEEA01682F396F22000523D4 /* CaptainAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainAppApp.swift; sourceTree = "<group>"; };
+		CEEA016A2F396F22000523D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CEEA016C2F396F29000523D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEEA016F2F396F29000523D4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CEEA01752F396F2A000523D4 /* CaptainAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaptainAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEEA01792F396F2A000523D4 /* CaptainAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainAppTests.swift; sourceTree = "<group>"; };
+		CEEA017F2F396F2A000523D4 /* CaptainAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaptainAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEEA01832F396F2A000523D4 /* CaptainAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainAppUITests.swift; sourceTree = "<group>"; };
+		CEEA01852F396F2A000523D4 /* CaptainAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CEEA01622F396F22000523D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEEA01722F396F2A000523D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEEA017C2F396F2A000523D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CEEA015C2F396F22000523D4 = {
+			isa = PBXGroup;
+			children = (
+				CEEA01672F396F22000523D4 /* CaptainApp */,
+				CEEA01782F396F2A000523D4 /* CaptainAppTests */,
+				CEEA01822F396F2A000523D4 /* CaptainAppUITests */,
+				CEEA01662F396F22000523D4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CEEA01662F396F22000523D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA01652F396F22000523D4 /* CaptainApp.app */,
+				CEEA01752F396F2A000523D4 /* CaptainAppTests.xctest */,
+				CEEA017F2F396F2A000523D4 /* CaptainAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEEA01672F396F22000523D4 /* CaptainApp */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA01682F396F22000523D4 /* CaptainAppApp.swift */,
+				CEEA016A2F396F22000523D4 /* ContentView.swift */,
+				CEEA016C2F396F29000523D4 /* Assets.xcassets */,
+				CEEA016E2F396F29000523D4 /* Preview Content */,
+			);
+			path = CaptainApp;
+			sourceTree = "<group>";
+		};
+		CEEA016E2F396F29000523D4 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA016F2F396F29000523D4 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CEEA01782F396F2A000523D4 /* CaptainAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA01792F396F2A000523D4 /* CaptainAppTests.swift */,
+			);
+			path = CaptainAppTests;
+			sourceTree = "<group>";
+		};
+		CEEA01822F396F2A000523D4 /* CaptainAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA01832F396F2A000523D4 /* CaptainAppUITests.swift */,
+				CEEA01852F396F2A000523D4 /* CaptainAppUITestsLaunchTests.swift */,
+			);
+			path = CaptainAppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CEEA01642F396F22000523D4 /* CaptainApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEEA01892F396F2A000523D4 /* Build configuration list for PBXNativeTarget "CaptainApp" */;
+			buildPhases = (
+				CEEA01612F396F22000523D4 /* Sources */,
+				CEEA01622F396F22000523D4 /* Frameworks */,
+				CEEA01632F396F22000523D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CaptainApp;
+			productName = CaptainApp;
+			productReference = CEEA01652F396F22000523D4 /* CaptainApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CEEA01742F396F2A000523D4 /* CaptainAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEEA018C2F396F2A000523D4 /* Build configuration list for PBXNativeTarget "CaptainAppTests" */;
+			buildPhases = (
+				CEEA01712F396F2A000523D4 /* Sources */,
+				CEEA01722F396F2A000523D4 /* Frameworks */,
+				CEEA01732F396F2A000523D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEEA01772F396F2A000523D4 /* PBXTargetDependency */,
+			);
+			name = CaptainAppTests;
+			productName = CaptainAppTests;
+			productReference = CEEA01752F396F2A000523D4 /* CaptainAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CEEA017E2F396F2A000523D4 /* CaptainAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEEA018F2F396F2A000523D4 /* Build configuration list for PBXNativeTarget "CaptainAppUITests" */;
+			buildPhases = (
+				CEEA017B2F396F2A000523D4 /* Sources */,
+				CEEA017C2F396F2A000523D4 /* Frameworks */,
+				CEEA017D2F396F2A000523D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEEA01812F396F2A000523D4 /* PBXTargetDependency */,
+			);
+			name = CaptainAppUITests;
+			productName = CaptainAppUITests;
+			productReference = CEEA017F2F396F2A000523D4 /* CaptainAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CEEA015D2F396F22000523D4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					CEEA01642F396F22000523D4 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					CEEA01742F396F2A000523D4 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = CEEA01642F396F22000523D4;
+					};
+					CEEA017E2F396F2A000523D4 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = CEEA01642F396F22000523D4;
+					};
+				};
+			};
+			buildConfigurationList = CEEA01602F396F22000523D4 /* Build configuration list for PBXProject "CaptainApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CEEA015C2F396F22000523D4;
+			productRefGroup = CEEA01662F396F22000523D4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CEEA01642F396F22000523D4 /* CaptainApp */,
+				CEEA01742F396F2A000523D4 /* CaptainAppTests */,
+				CEEA017E2F396F2A000523D4 /* CaptainAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEEA01632F396F22000523D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEEA01702F396F29000523D4 /* Preview Assets.xcassets in Resources */,
+				CEEA016D2F396F29000523D4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEEA01732F396F2A000523D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEEA017D2F396F2A000523D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CEEA01612F396F22000523D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEEA016B2F396F22000523D4 /* ContentView.swift in Sources */,
+				CEEA01692F396F22000523D4 /* CaptainAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEEA01712F396F2A000523D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEEA017A2F396F2A000523D4 /* CaptainAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEEA017B2F396F2A000523D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEEA01842F396F2A000523D4 /* CaptainAppUITests.swift in Sources */,
+				CEEA01862F396F2A000523D4 /* CaptainAppUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CEEA01772F396F2A000523D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEEA01642F396F22000523D4 /* CaptainApp */;
+			targetProxy = CEEA01762F396F2A000523D4 /* PBXContainerItemProxy */;
+		};
+		CEEA01812F396F2A000523D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEEA01642F396F22000523D4 /* CaptainApp */;
+			targetProxy = CEEA01802F396F2A000523D4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CEEA01872F396F2A000523D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CEEA01882F396F2A000523D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CEEA018A2F396F2A000523D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CaptainApp/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ladyTaxi.CaptainApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CEEA018B2F396F2A000523D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CaptainApp/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ladyTaxi.CaptainApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CEEA018D2F396F2A000523D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ladyTaxi.CaptainAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaptainApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CaptainApp";
+			};
+			name = Debug;
+		};
+		CEEA018E2F396F2A000523D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ladyTaxi.CaptainAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaptainApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CaptainApp";
+			};
+			name = Release;
+		};
+		CEEA01902F396F2A000523D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ladyTaxi.CaptainAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CaptainApp;
+			};
+			name = Debug;
+		};
+		CEEA01912F396F2A000523D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ladyTaxi.CaptainAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CaptainApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CEEA01602F396F22000523D4 /* Build configuration list for PBXProject "CaptainApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEEA01872F396F2A000523D4 /* Debug */,
+				CEEA01882F396F2A000523D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEEA01892F396F2A000523D4 /* Build configuration list for PBXNativeTarget "CaptainApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEEA018A2F396F2A000523D4 /* Debug */,
+				CEEA018B2F396F2A000523D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEEA018C2F396F2A000523D4 /* Build configuration list for PBXNativeTarget "CaptainAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEEA018D2F396F2A000523D4 /* Debug */,
+				CEEA018E2F396F2A000523D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEEA018F2F396F2A000523D4 /* Build configuration list for PBXNativeTarget "CaptainAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEEA01902F396F2A000523D4 /* Debug */,
+				CEEA01912F396F2A000523D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CEEA015D2F396F22000523D4 /* Project object */;
+}
