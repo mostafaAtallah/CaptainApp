@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE1811B72F3FDEB80032BE7C /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1811B62F3FDEB80032BE7C /* WebSocketService.swift */; };
+		CE1811BA2F3FEDB00032BE7C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1811B82F3FECB30032BE7C /* HomeViewModel.swift */; };
+		CE1811BC2F3FEDF90032BE7C /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1811BB2F3FEDF90032BE7C /* HomeState.swift */; };
+		CE1811C12F3FEE5F0032BE7C /* RideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1811C02F3FEE5F0032BE7C /* RideViewModel.swift */; };
 		CEEA01692F396F22000523D4 /* CaptainAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01682F396F22000523D4 /* CaptainAppApp.swift */; };
 		CEEA016B2F396F22000523D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA016A2F396F22000523D4 /* ContentView.swift */; };
 		CEEA016D2F396F29000523D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEA016C2F396F29000523D4 /* Assets.xcassets */; };
@@ -14,6 +18,12 @@
 		CEEA017A2F396F2A000523D4 /* CaptainAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01792F396F2A000523D4 /* CaptainAppTests.swift */; };
 		CEEA01842F396F2A000523D4 /* CaptainAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01832F396F2A000523D4 /* CaptainAppUITests.swift */; };
 		CEEA01862F396F2A000523D4 /* CaptainAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01852F396F2A000523D4 /* CaptainAppUITestsLaunchTests.swift */; };
+		CEEA01952F3973C0000523D4 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01942F3973C0000523D4 /* AppColors.swift */; };
+		CEEA019B2F3974B9000523D4 /* home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA019A2F3974B9000523D4 /* home.swift */; };
+		CEEA01A02F3A21B9000523D4 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA019F2F3A21B9000523D4 /* LoginScreen.swift */; };
+		CEEA01A32F3B8687000523D4 /* api_constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01A22F3B8687000523D4 /* api_constants.swift */; };
+		CEEA01A52F3CBC79000523D4 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01A42F3CBC79000523D4 /* RegisterScreen.swift */; };
+		CEEA01A72F3CC1F6000523D4 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01A62F3CC1F6000523D4 /* AuthViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE1811B62F3FDEB80032BE7C /* WebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketService.swift; sourceTree = "<group>"; };
+		CE1811B82F3FECB30032BE7C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CE1811BB2F3FEDF90032BE7C /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
+		CE1811C02F3FEE5F0032BE7C /* RideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideViewModel.swift; sourceTree = "<group>"; };
 		CEEA01652F396F22000523D4 /* CaptainApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaptainApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA01682F396F22000523D4 /* CaptainAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainAppApp.swift; sourceTree = "<group>"; };
 		CEEA016A2F396F22000523D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +58,12 @@
 		CEEA017F2F396F2A000523D4 /* CaptainAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaptainAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA01832F396F2A000523D4 /* CaptainAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainAppUITests.swift; sourceTree = "<group>"; };
 		CEEA01852F396F2A000523D4 /* CaptainAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CEEA01942F3973C0000523D4 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		CEEA019A2F3974B9000523D4 /* home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home.swift; sourceTree = "<group>"; };
+		CEEA019F2F3A21B9000523D4 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		CEEA01A22F3B8687000523D4 /* api_constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = api_constants.swift; sourceTree = "<group>"; };
+		CEEA01A42F3CBC79000523D4 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
+		CEEA01A62F3CC1F6000523D4 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +91,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE1811B12F3FD7B70032BE7C /* services */ = {
+			isa = PBXGroup;
+			children = (
+				CE1811B62F3FDEB80032BE7C /* WebSocketService.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		CE1811BD2F3FEE410032BE7C /* ride */ = {
+			isa = PBXGroup;
+			children = (
+				CE1811BE2F3FEE490032BE7C /* presentation */,
+			);
+			path = ride;
+			sourceTree = "<group>";
+		};
+		CE1811BE2F3FEE490032BE7C /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CE1811BF2F3FEE4F0032BE7C /* pages */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		CE1811BF2F3FEE4F0032BE7C /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				CE1811C02F3FEE5F0032BE7C /* RideViewModel.swift */,
+			);
+			path = pages;
+			sourceTree = "<group>";
+		};
 		CEEA015C2F396F22000523D4 = {
 			isa = PBXGroup;
 			children = (
@@ -94,9 +146,11 @@
 		CEEA01672F396F22000523D4 /* CaptainApp */ = {
 			isa = PBXGroup;
 			children = (
+				CEEA01962F397485000523D4 /* Features */,
+				CEEA01922F39736B000523D4 /* Core */,
 				CEEA01682F396F22000523D4 /* CaptainAppApp.swift */,
-				CEEA016A2F396F22000523D4 /* ContentView.swift */,
 				CEEA016C2F396F29000523D4 /* Assets.xcassets */,
+				CEEA016A2F396F22000523D4 /* ContentView.swift */,
 				CEEA016E2F396F29000523D4 /* Preview Content */,
 			);
 			path = CaptainApp;
@@ -125,6 +179,94 @@
 				CEEA01852F396F2A000523D4 /* CaptainAppUITestsLaunchTests.swift */,
 			);
 			path = CaptainAppUITests;
+			sourceTree = "<group>";
+		};
+		CEEA01922F39736B000523D4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA01A12F3B866F000523D4 /* constants */,
+				CEEA01932F39737E000523D4 /* Theme */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		CEEA01932F39737E000523D4 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA01942F3973C0000523D4 /* AppColors.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		CEEA01962F397485000523D4 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				CE1811BD2F3FEE410032BE7C /* ride */,
+				CEEA019C2F3A216E000523D4 /* auth */,
+				CEEA01972F397494000523D4 /* home */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		CEEA01972F397494000523D4 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				CE1811B12F3FD7B70032BE7C /* services */,
+				CEEA01982F39749C000523D4 /* presentation */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		CEEA01982F39749C000523D4 /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA01992F3974A9000523D4 /* pages */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		CEEA01992F3974A9000523D4 /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA019A2F3974B9000523D4 /* home.swift */,
+				CE1811B82F3FECB30032BE7C /* HomeViewModel.swift */,
+				CE1811BB2F3FEDF90032BE7C /* HomeState.swift */,
+			);
+			path = pages;
+			sourceTree = "<group>";
+		};
+		CEEA019C2F3A216E000523D4 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA019D2F3A217A000523D4 /* presentation */,
+			);
+			path = auth;
+			sourceTree = "<group>";
+		};
+		CEEA019D2F3A217A000523D4 /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA019E2F3A2198000523D4 /* pages */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		CEEA019E2F3A2198000523D4 /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA019F2F3A21B9000523D4 /* LoginScreen.swift */,
+				CEEA01A42F3CBC79000523D4 /* RegisterScreen.swift */,
+				CEEA01A62F3CC1F6000523D4 /* AuthViewModel.swift */,
+			);
+			path = pages;
+			sourceTree = "<group>";
+		};
+		CEEA01A12F3B866F000523D4 /* constants */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA01A22F3B8687000523D4 /* api_constants.swift */,
+			);
+			path = constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +399,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEA01952F3973C0000523D4 /* AppColors.swift in Sources */,
 				CEEA016B2F396F22000523D4 /* ContentView.swift in Sources */,
+				CE1811C12F3FEE5F0032BE7C /* RideViewModel.swift in Sources */,
+				CEEA01A32F3B8687000523D4 /* api_constants.swift in Sources */,
+				CE1811BA2F3FEDB00032BE7C /* HomeViewModel.swift in Sources */,
+				CEEA01A52F3CBC79000523D4 /* RegisterScreen.swift in Sources */,
+				CEEA01A72F3CC1F6000523D4 /* AuthViewModel.swift in Sources */,
+				CEEA019B2F3974B9000523D4 /* home.swift in Sources */,
+				CE1811BC2F3FEDF90032BE7C /* HomeState.swift in Sources */,
 				CEEA01692F396F22000523D4 /* CaptainAppApp.swift in Sources */,
+				CE1811B72F3FDEB80032BE7C /* WebSocketService.swift in Sources */,
+				CEEA01A02F3A21B9000523D4 /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
