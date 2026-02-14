@@ -24,6 +24,9 @@ struct ApiConstants {
     static let driverStatusPath = "/api/driver/status"
     static let driverEarningsPath = "/api/driver/earnings"
     static let driverRideHistoryPath = "/api/driver/rides/history"
+    static func captainRideHistoryPath(captainId: Int) -> String {
+        return "/api/trips/captain/\(captainId)"
+    }
     static func updatePassengerPreferencePath(id: String) -> String {
         return "/api/captains/\(id)/passenger-preference"
     }
@@ -61,10 +64,19 @@ struct ApiConstants {
     static var registerCaptainUrl: URL? { URL(string: baseUrl + registerCaptainPath) }
     static var registerUserUrl: URL? { URL(string: baseUrl + registerUserPath) }
     static var driverProfileUrl: URL? { URL(string: baseUrl + driverProfilePath) }
+    static func captainProfilePath(captainId: Int) -> String {
+        return "/api/captains/\(captainId)"
+    }
+    static func captainProfileUrl(captainId: Int) -> URL? {
+        URL(string: baseUrl + captainProfilePath(captainId: captainId))
+    }
     static var driverDocumentsUrl: URL? { URL(string: baseUrl + driverDocumentsPath) }
     static var driverStatusUrl: URL? { URL(string: baseUrl + driverStatusPath) }
     static var driverEarningsUrl: URL? { URL(string: baseUrl + driverEarningsPath) }
     static var driverRideHistoryUrl: URL? { URL(string: baseUrl + driverRideHistoryPath) }
+    static func captainRideHistoryUrl(captainId: Int) -> URL? {
+        URL(string: baseUrl + captainRideHistoryPath(captainId: captainId))
+    }
 
     static func updatePassengerPreferenceUrl(id: String) -> URL? {
         URL(string: baseUrl + updatePassengerPreferencePath(id: id))

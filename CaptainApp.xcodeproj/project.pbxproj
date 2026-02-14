@@ -11,6 +11,8 @@
 		CE1811BA2F3FEDB00032BE7C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1811B82F3FECB30032BE7C /* HomeViewModel.swift */; };
 		CE1811BC2F3FEDF90032BE7C /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1811BB2F3FEDF90032BE7C /* HomeState.swift */; };
 		CE1811C12F3FEE5F0032BE7C /* RideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1811C02F3FEE5F0032BE7C /* RideViewModel.swift */; };
+		CE22B8C72F4134A00071C2D2 /* RideHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22B8C62F4134A00071C2D2 /* RideHistory.swift */; };
+		CE22B8CA2F4136010071C2D2 /* profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22B8C92F4136010071C2D2 /* profile.swift */; };
 		CEEA01692F396F22000523D4 /* CaptainAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA01682F396F22000523D4 /* CaptainAppApp.swift */; };
 		CEEA016B2F396F22000523D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA016A2F396F22000523D4 /* ContentView.swift */; };
 		CEEA016D2F396F29000523D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEA016C2F396F29000523D4 /* Assets.xcassets */; };
@@ -48,6 +50,8 @@
 		CE1811B82F3FECB30032BE7C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CE1811BB2F3FEDF90032BE7C /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
 		CE1811C02F3FEE5F0032BE7C /* RideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideViewModel.swift; sourceTree = "<group>"; };
+		CE22B8C62F4134A00071C2D2 /* RideHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideHistory.swift; sourceTree = "<group>"; };
+		CE22B8C92F4136010071C2D2 /* profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profile.swift; sourceTree = "<group>"; };
 		CEEA01652F396F22000523D4 /* CaptainApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaptainApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA01682F396F22000523D4 /* CaptainAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainAppApp.swift; sourceTree = "<group>"; };
 		CEEA016A2F396F22000523D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +123,31 @@
 			isa = PBXGroup;
 			children = (
 				CE1811C02F3FEE5F0032BE7C /* RideViewModel.swift */,
+				CE22B8C62F4134A00071C2D2 /* RideHistory.swift */,
+			);
+			path = pages;
+			sourceTree = "<group>";
+		};
+		CE22B8BF2F41322E0071C2D2 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE22B8C42F4134630071C2D2 /* presentation */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
+		CE22B8C42F4134630071C2D2 /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CE22B8C52F41346C0071C2D2 /* pages */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		CE22B8C52F41346C0071C2D2 /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				CE22B8C92F4136010071C2D2 /* profile.swift */,
 			);
 			path = pages;
 			sourceTree = "<group>";
@@ -201,6 +230,7 @@
 		CEEA01962F397485000523D4 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				CE22B8BF2F41322E0071C2D2 /* profile */,
 				CE1811BD2F3FEE410032BE7C /* ride */,
 				CEEA019C2F3A216E000523D4 /* auth */,
 				CEEA01972F397494000523D4 /* home */,
@@ -410,6 +440,8 @@
 				CE1811BC2F3FEDF90032BE7C /* HomeState.swift in Sources */,
 				CEEA01692F396F22000523D4 /* CaptainAppApp.swift in Sources */,
 				CE1811B72F3FDEB80032BE7C /* WebSocketService.swift in Sources */,
+				CE22B8CA2F4136010071C2D2 /* profile.swift in Sources */,
+				CE22B8C72F4134A00071C2D2 /* RideHistory.swift in Sources */,
 				CEEA01A02F3A21B9000523D4 /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

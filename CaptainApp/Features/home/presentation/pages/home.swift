@@ -5,6 +5,12 @@ import Combine
 
 // MARK: - 2. Main Page View
 struct HomePage: View {
+    private enum BottomTab {
+        case home
+        case rideHistory
+        case profile
+    }
+
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var rideViewModel: RideViewModel
@@ -16,7 +22,12 @@ struct HomePage: View {
     @State private var fallbackRouteLine: MKPolyline?
     @State private var resolvedPickupCoordinate: CLLocationCoordinate2D?
     @State private var lastCaptainCoordinate: CLLocationCoordinate2D?
+    @State private var pickupLineSourceCoordinate: CLLocationCoordinate2D?
+    @State private var lineDebugText: String = "line: idle"
+    @State private var selectedTab: BottomTab = .home
     @StateObject private var locationProvider = LocationProvider()
+    private let minLineDistanceMeters: CLLocationDistance = 2
+    private let maxLineDistanceMeters: CLLocationDistance = 200_000
 
     var body: some View {
         NavigationStack {
@@ -26,7 +37,11 @@ struct HomePage: View {
             let captainId = authViewModel.captainId
             homeViewModel.initializeHome(captainId: captainId)
             homeViewModel.bindWebSocket(rideViewModel.webSocketService)
-            rideViewModel.connectSocket(authToken: authViewModel.authToken ?? "")
+            if let token = authViewModel.authToken, !token.isEmpty {
+                rideViewModel.connectSocket(authToken: token)
+            } else {
+                print("HomePage: missing auth token, websocket connection skipped")
+            }
             locationProvider.start()
         }
         .onDisappear {
@@ -47,84 +62,174 @@ struct HomePage: View {
             pendingRide: let pending,
             someOtherData: _
         ):
-            ZStack {
-                Map(position: $cameraPosition) {
-                     if let coordinate = locationProvider.currentLocation?.coordinate ?? pos?.coordinate ?? lastCaptainCoordinate {
-                        Marker("Your Location", coordinate: coordinate)
-                    }
-                    if let pickup = pickupCoordinate {
-                        Marker("Pickup", coordinate: pickup)
-                            .tint(AppColors.pickupMarker)
-                    }
-                    if let routeToPickup {
-                        MapPolyline(routeToPickup.polyline)
-                            .stroke(AppColors.routeLine, lineWidth: 6)
-                    } else if let fallbackRouteLine {
-                        MapPolyline(fallbackRouteLine)
-                            .stroke(AppColors.routeLine, style: StrokeStyle(lineWidth: 5, dash: [8, 6]))
+            VStack(spacing: 0) {
+                Group {
+                    switch selectedTab {
+                    case .home:
+                        homeTabContent(isOnline: isOnline, pos: pos, pending: pending)
+                    case .rideHistory:
+                        RideHistoryPage()
+                    case .profile:
+                        ProfilePage()
                     }
                 }
-                .ignoresSafeArea()
-                
-                VStack {
-                    TopBarView(isOnline: isOnline)
-                    if let activePickupRide {
-                        pickupGuidanceCard(for: activePickupRide)
-                    }
-                    Spacer()
-                    OnlineStatusControlView(isOnline: isOnline)
+                bottomTabBar
+            }
+        }
+    }
+
+    private func homeTabContent(
+        isOnline: Bool,
+        pos: CLLocation?,
+        pending: PendingRideRequest?
+    ) -> some View {
+        ZStack {
+            Map(position: $cameraPosition) {
+                 if let coordinate = captainDisplayCoordinate ?? pos?.coordinate {
+                    Marker("Your Location", coordinate: coordinate)
+                }
+                if let pickup = pickupCoordinate {
+                    Marker("Pickup", coordinate: pickup)
+                        .tint(AppColors.pickupMarker)
+                }
+                if let fallbackRouteLine {
+                    MapPolyline(fallbackRouteLine)
+                        .stroke(AppColors.routeLine, lineWidth: 6)
+                } else if let routeToPickup {
+                    MapPolyline(routeToPickup.polyline)
+                        .stroke(AppColors.routeLine, lineWidth: 5)
                 }
             }
-            .onAppear {
-                if let coordinate = locationProvider.currentLocation?.coordinate ?? pos?.coordinate {
-                    lastCaptainCoordinate = coordinate
-                    cameraPosition = .region(MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
+            .ignoresSafeArea()
+
+            VStack {
+                TopBarView(isOnline: isOnline)
+                #if DEBUG
+                Text(lineDebugText)
+                    .font(.caption2)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 6)
+                    .background(Color.black.opacity(0.7))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .padding(.horizontal, 12)
+                #endif
+                if let activePickupRide {
+                    pickupGuidanceCard(for: activePickupRide)
                 }
+                Spacer()
+                OnlineStatusControlView(isOnline: isOnline)
             }
-            .onChange(of: pos) { _, newPos in
-                if let coordinate = locationProvider.currentLocation?.coordinate ?? newPos?.coordinate {
-                    lastCaptainCoordinate = coordinate
-                    // Keep following captain only when there is no accepted pickup navigation yet.
-                    guard activePickupRide == nil else { return }
+        }
+        .onAppear {
+            if let coordinate = captainDisplayCoordinate ?? pos?.coordinate {
+                lastCaptainCoordinate = coordinate
+                cameraPosition = .region(MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
+            }
+        }
+        .onChange(of: pos) { _, newPos in
+            if let coordinate = captainDisplayCoordinate ?? newPos?.coordinate {
+                let hadNoCaptainLocation = (lastCaptainCoordinate == nil)
+                lastCaptainCoordinate = coordinate
+
+                if hadNoCaptainLocation && activePickupRide == nil {
                     withAnimation {
                         cameraPosition = .region(MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
                     }
                 }
             }
-            .onReceive(locationProvider.$currentLocation) { _ in
-                if let coordinate = locationProvider.currentLocation?.coordinate {
-                    lastCaptainCoordinate = coordinate
-                }
-                refreshRouteToPickup()
-            }
-            .onChange(of: activePickupRide?.id) { _, _ in
-                resolvePickupCoordinateIfNeeded()
-                refreshRouteToPickup()
-            }
-            .onChange(of: pending) { _, newValue in
-                if let request = newValue {
-                    self.currentPendingRideRequest = request
+        }
+        .onReceive(locationProvider.$currentLocation) { _ in
+            if let coordinate = captainDisplayCoordinate {
+                lastCaptainCoordinate = coordinate
+                if activePickupRide != nil {
+                    pickupLineSourceCoordinate = coordinate
                 }
             }
-            .sheet(item: $currentPendingRideRequest) { ride in
-                RideRequestBottomSheet(
-                    rideRequest: ride,
-                    onAccept: {
-                        rideViewModel.acceptRide(rideId: ride.rideId, authToken: authViewModel.authToken)
-                        activePickupRide = ride
-                        resolvePickupCoordinateIfNeeded()
-                        focusOnPickup()
-                        homeViewModel.rideRequestDismissed()
-                        currentPendingRideRequest = nil
-                    },
-                    onReject: {
-                        homeViewModel.rideRequestDismissed()
-                        currentPendingRideRequest = nil
-                    }
-                )
-                .presentationDetents([.fraction(0.6)])
+            refreshRouteToPickup()
+        }
+        .onChange(of: activePickupRide?.id) { _, _ in
+            if activePickupRide == nil {
+                pickupLineSourceCoordinate = nil
+                fallbackRouteLine = nil
+                routeToPickup = nil
+            }
+            resolvePickupCoordinateIfNeeded()
+            refreshRouteToPickup()
+        }
+        .onChange(of: pending) { _, newValue in
+            if let request = newValue {
+                self.currentPendingRideRequest = request
             }
         }
+        .sheet(item: $currentPendingRideRequest) { ride in
+            RideRequestBottomSheet(
+                rideRequest: ride,
+                onAccept: {
+                    pickupLineSourceCoordinate = captainDisplayCoordinate ?? pos?.coordinate ?? lastCaptainCoordinate
+                    rideViewModel.acceptRide(rideId: ride.rideId, authToken: authViewModel.authToken)
+                    activePickupRide = ride
+                    resolvePickupCoordinateIfNeeded()
+                    refreshRouteToPickup()
+                    focusOnPickup()
+                    homeViewModel.rideRequestDismissed()
+                    currentPendingRideRequest = nil
+                },
+                onReject: {
+                    homeViewModel.rideRequestDismissed()
+                    currentPendingRideRequest = nil
+                }
+            )
+            .presentationDetents([.fraction(0.6)])
+        }
+    }
+
+    private var bottomTabBar: some View {
+        HStack {
+            tabButton(tab: .home, title: "Home", systemImage: "house.fill")
+            tabButton(tab: .rideHistory, title: "Ride History", systemImage: "clock.fill")
+            tabButton(tab: .profile, title: "Profile", systemImage: "person.crop.circle.fill")
+        }
+        .padding(.horizontal, 12)
+        .padding(.top, 10)
+        .padding(.bottom, 18)
+        .background(AppColors.surface)
+        .overlay(alignment: .top) {
+            Divider()
+        }
+    }
+
+    private func tabButton(tab: BottomTab, title: String, systemImage: String) -> some View {
+        let isSelected = selectedTab == tab
+        return Button {
+            selectedTab = tab
+        } label: {
+            VStack(spacing: 4) {
+                Image(systemName: systemImage)
+                    .font(.system(size: 18, weight: .semibold))
+                Text(title)
+                    .font(.caption)
+            }
+            .foregroundStyle(isSelected ? AppColors.primary : AppColors.textSecondary)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 6)
+        }
+    }
+
+    private func placeholderTabContent(title: String, subtitle: String) -> some View {
+        VStack(spacing: 10) {
+            Spacer()
+            Text(title)
+                .font(.title3.bold())
+            Text(subtitle)
+                .font(.subheadline)
+                .foregroundStyle(AppColors.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(AppColors.background)
     }
 
     private var pickupCoordinate: CLLocationCoordinate2D? {
@@ -158,18 +263,59 @@ struct HomePage: View {
     }
 
     private func refreshRouteToPickup() {
+        let sourceForDebug = pickupLineSourceCoordinate ?? captainDisplayCoordinate ?? lineSourceCoordinate
+        let destinationForDebug = pickupCoordinate
+        lineDebugText = "line: src=\(coordText(sourceForDebug)) dst=\(coordText(destinationForDebug))"
+
         guard let destination = pickupCoordinate else {
             routeToPickup = nil
             fallbackRouteLine = nil
+            lineDebugText = "line: no destination"
             return
         }
-        guard let sourceCoordinate = locationProvider.currentLocation?.coordinate ?? lastCaptainCoordinate else { return }
+        guard let sourceCoordinate = pickupLineSourceCoordinate ?? captainDisplayCoordinate ?? lineSourceCoordinate else {
+            routeToPickup = nil
+            fallbackRouteLine = nil
+            lineDebugText = "line: no source"
+            return
+        }
+        guard sourceCoordinate.isValidCoordinate, destination.isValidCoordinate else {
+            routeToPickup = nil
+            fallbackRouteLine = nil
+            lineDebugText = "line: invalid coords"
+            return
+        }
+        guard sourceCoordinate.latitude != destination.latitude || sourceCoordinate.longitude != destination.longitude else {
+            fallbackRouteLine = nil
+            routeToPickup = nil
+            lineDebugText = "line: same point"
+            return
+        }
 
-        // Draw at least a direct line immediately; replaced by turn-by-turn route when directions return.
+        let sourcePoint = MKMapPoint(sourceCoordinate)
+        let destinationPoint = MKMapPoint(destination)
+        let straightLineDistanceMeters = sourcePoint.distance(to: destinationPoint)
+        guard straightLineDistanceMeters.isFinite,
+              straightLineDistanceMeters > minLineDistanceMeters else {
+            // Defensive guard against broken coordinates creating off-map/infinite-looking lines.
+            routeToPickup = nil
+            fallbackRouteLine = nil
+            lineDebugText = "line: distance invalid \(Int(straightLineDistanceMeters))m"
+            return
+        }
+        guard straightLineDistanceMeters <= maxLineDistanceMeters else {
+            routeToPickup = nil
+            fallbackRouteLine = nil
+            lineDebugText = "line: source too far \(Int(straightLineDistanceMeters))m"
+            return
+        }
+
+        // Always draw a direct straight line between captain and pickup.
         fallbackRouteLine = MKPolyline(
             coordinates: [sourceCoordinate, destination],
             count: 2
         )
+        lineDebugText = "line: drawn \(Int(straightLineDistanceMeters))m"
 
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: sourceCoordinate))
@@ -180,10 +326,6 @@ struct HomePage: View {
             guard error == nil, let route = response?.routes.first else { return }
             DispatchQueue.main.async {
                 routeToPickup = route
-                fallbackRouteLine = nil
-                withAnimation {
-                    cameraPosition = .rect(route.polyline.boundingMapRect)
-                }
             }
         }
     }
@@ -199,6 +341,57 @@ struct HomePage: View {
                 )
             )
         }
+    }
+
+    private var preferredCaptainCoordinate: CLLocationCoordinate2D? {
+        if let currentLocation = locationProvider.currentLocation {
+            let coordinate = currentLocation.coordinate
+            if coordinate.isUsableForRouting {
+                return coordinate
+            }
+        }
+
+        if let lastCaptainCoordinate, lastCaptainCoordinate.isUsableForRouting {
+            return lastCaptainCoordinate
+        }
+
+        return nil
+    }
+
+    private var lineSourceCoordinate: CLLocationCoordinate2D? {
+        if let preferredCaptainCoordinate {
+            return preferredCaptainCoordinate
+        }
+
+        if let fallbackFromState = homeCurrentPositionCoordinate, fallbackFromState.isValidCoordinate {
+            return fallbackFromState
+        }
+
+        return nil
+    }
+
+    private var captainDisplayCoordinate: CLLocationCoordinate2D? {
+        if let preferredCaptainCoordinate {
+            return preferredCaptainCoordinate
+        }
+        if let fromState = homeCurrentPositionCoordinate, fromState.isUsableForRouting {
+            return fromState
+        }
+        return nil
+    }
+
+    private var homeCurrentPositionCoordinate: CLLocationCoordinate2D? {
+        switch homeViewModel.state {
+        case .ready(_, let currentPosition, _, _):
+            return currentPosition?.coordinate
+        default:
+            return nil
+        }
+    }
+
+    private func coordText(_ coordinate: CLLocationCoordinate2D?) -> String {
+        guard let coordinate else { return "nil" }
+        return String(format: "%.5f,%.5f", coordinate.latitude, coordinate.longitude)
     }
 
     @ViewBuilder
@@ -222,6 +415,25 @@ struct HomePage: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(color: .black.opacity(0.12), radius: 8, y: 2)
         .padding(.horizontal, 16)
+    }
+}
+
+private extension CLLocationCoordinate2D {
+    var isValidCoordinate: Bool {
+        CLLocationCoordinate2DIsValid(self)
+            && latitude >= -90
+            && latitude <= 90
+            && longitude >= -180
+            && longitude <= 180
+    }
+
+    var isUsableForRouting: Bool {
+        guard isValidCoordinate else { return false }
+        // Reject the common invalid origin coordinate.
+        if abs(latitude) < 0.0001 && abs(longitude) < 0.0001 {
+            return false
+        }
+        return true
     }
 }
 
