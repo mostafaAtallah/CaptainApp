@@ -11,6 +11,12 @@ struct HomePage: View {
     
     @State private var cameraPosition: MapCameraPosition = .automatic
     @State private var currentPendingRideRequest: PendingRideRequest?
+    @State private var activePickupRide: PendingRideRequest?
+    @State private var routeToPickup: MKRoute?
+    @State private var fallbackRouteLine: MKPolyline?
+    @State private var resolvedPickupCoordinate: CLLocationCoordinate2D?
+    @State private var lastCaptainCoordinate: CLLocationCoordinate2D?
+    @StateObject private var locationProvider = LocationProvider()
 
     var body: some View {
         NavigationStack {
@@ -21,6 +27,7 @@ struct HomePage: View {
             homeViewModel.initializeHome(captainId: captainId)
             homeViewModel.bindWebSocket(rideViewModel.webSocketService)
             rideViewModel.connectSocket(authToken: authViewModel.authToken ?? "")
+            locationProvider.start()
         }
         .onDisappear {
             rideViewModel.disconnectSocket()
@@ -42,29 +49,57 @@ struct HomePage: View {
         ):
             ZStack {
                 Map(position: $cameraPosition) {
-                     if let coordinate = pos?.coordinate {
+                     if let coordinate = locationProvider.currentLocation?.coordinate ?? pos?.coordinate ?? lastCaptainCoordinate {
                         Marker("Your Location", coordinate: coordinate)
+                    }
+                    if let pickup = pickupCoordinate {
+                        Marker("Pickup", coordinate: pickup)
+                            .tint(AppColors.pickupMarker)
+                    }
+                    if let routeToPickup {
+                        MapPolyline(routeToPickup.polyline)
+                            .stroke(AppColors.routeLine, lineWidth: 6)
+                    } else if let fallbackRouteLine {
+                        MapPolyline(fallbackRouteLine)
+                            .stroke(AppColors.routeLine, style: StrokeStyle(lineWidth: 5, dash: [8, 6]))
                     }
                 }
                 .ignoresSafeArea()
                 
                 VStack {
                     TopBarView(isOnline: isOnline)
+                    if let activePickupRide {
+                        pickupGuidanceCard(for: activePickupRide)
+                    }
                     Spacer()
                     OnlineStatusControlView(isOnline: isOnline)
                 }
             }
             .onAppear {
-                if let coordinate = pos?.coordinate {
+                if let coordinate = locationProvider.currentLocation?.coordinate ?? pos?.coordinate {
+                    lastCaptainCoordinate = coordinate
                     cameraPosition = .region(MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
                 }
             }
             .onChange(of: pos) { _, newPos in
-                if let coordinate = newPos?.coordinate {
+                if let coordinate = locationProvider.currentLocation?.coordinate ?? newPos?.coordinate {
+                    lastCaptainCoordinate = coordinate
+                    // Keep following captain only when there is no accepted pickup navigation yet.
+                    guard activePickupRide == nil else { return }
                     withAnimation {
                         cameraPosition = .region(MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
                     }
                 }
+            }
+            .onReceive(locationProvider.$currentLocation) { _ in
+                if let coordinate = locationProvider.currentLocation?.coordinate {
+                    lastCaptainCoordinate = coordinate
+                }
+                refreshRouteToPickup()
+            }
+            .onChange(of: activePickupRide?.id) { _, _ in
+                resolvePickupCoordinateIfNeeded()
+                refreshRouteToPickup()
             }
             .onChange(of: pending) { _, newValue in
                 if let request = newValue {
@@ -75,7 +110,10 @@ struct HomePage: View {
                 RideRequestBottomSheet(
                     rideRequest: ride,
                     onAccept: {
-                        rideViewModel.acceptRide(rideId: ride.rideId)
+                        rideViewModel.acceptRide(rideId: ride.rideId, authToken: authViewModel.authToken)
+                        activePickupRide = ride
+                        resolvePickupCoordinateIfNeeded()
+                        focusOnPickup()
                         homeViewModel.rideRequestDismissed()
                         currentPendingRideRequest = nil
                     },
@@ -87,6 +125,103 @@ struct HomePage: View {
                 .presentationDetents([.fraction(0.6)])
             }
         }
+    }
+
+    private var pickupCoordinate: CLLocationCoordinate2D? {
+        if let lat = activePickupRide?.pickupLat, let lng = activePickupRide?.pickupLng {
+            return CLLocationCoordinate2D(latitude: lat, longitude: lng)
+        }
+        return resolvedPickupCoordinate
+    }
+
+    private func resolvePickupCoordinateIfNeeded() {
+        guard let ride = activePickupRide else {
+            resolvedPickupCoordinate = nil
+            return
+        }
+
+        if let lat = ride.pickupLat, let lng = ride.pickupLng {
+            resolvedPickupCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+            focusOnPickup()
+            return
+        }
+
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(ride.pickupLocation) { placemarks, error in
+            guard error == nil, let coordinate = placemarks?.first?.location?.coordinate else { return }
+            DispatchQueue.main.async {
+                resolvedPickupCoordinate = coordinate
+                focusOnPickup()
+                refreshRouteToPickup()
+            }
+        }
+    }
+
+    private func refreshRouteToPickup() {
+        guard let destination = pickupCoordinate else {
+            routeToPickup = nil
+            fallbackRouteLine = nil
+            return
+        }
+        guard let sourceCoordinate = locationProvider.currentLocation?.coordinate ?? lastCaptainCoordinate else { return }
+
+        // Draw at least a direct line immediately; replaced by turn-by-turn route when directions return.
+        fallbackRouteLine = MKPolyline(
+            coordinates: [sourceCoordinate, destination],
+            count: 2
+        )
+
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: sourceCoordinate))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+        request.transportType = .automobile
+
+        MKDirections(request: request).calculate { response, error in
+            guard error == nil, let route = response?.routes.first else { return }
+            DispatchQueue.main.async {
+                routeToPickup = route
+                fallbackRouteLine = nil
+                withAnimation {
+                    cameraPosition = .rect(route.polyline.boundingMapRect)
+                }
+            }
+        }
+    }
+
+    private func focusOnPickup() {
+        guard let pickup = pickupCoordinate else { return }
+        withAnimation {
+            cameraPosition = .region(
+                MKCoordinateRegion(
+                    center: pickup,
+                    latitudinalMeters: 900,
+                    longitudinalMeters: 900
+                )
+            )
+        }
+    }
+
+    @ViewBuilder
+    private func pickupGuidanceCard(for ride: PendingRideRequest) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Heading to Pickup")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(AppColors.textSecondary)
+            Text(ride.pickupLocation)
+                .font(.subheadline.weight(.bold))
+                .lineLimit(1)
+            if let routeToPickup {
+                Text("\(Int(routeToPickup.expectedTravelTime / 60)) min • \(String(format: "%.1f", routeToPickup.distance / 1000)) km")
+                    .font(.caption)
+                    .foregroundStyle(AppColors.textSecondary)
+            }
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(AppColors.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .shadow(color: .black.opacity(0.12), radius: 8, y: 2)
+        .padding(.horizontal, 16)
     }
 }
 
@@ -254,5 +389,26 @@ struct RideRequestBottomSheet: View {
             }
             Spacer()
         }
+    }
+}
+
+final class LocationProvider: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var currentLocation: CLLocation?
+
+    private let manager = CLLocationManager()
+
+    override init() {
+        super.init()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+
+    func start() {
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLocation = locations.last
     }
 }

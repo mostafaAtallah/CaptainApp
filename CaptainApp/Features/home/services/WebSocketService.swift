@@ -10,6 +10,8 @@ struct PendingRideRequest: Identifiable, Equatable, Codable {
     let customerName: String?
     let customerRating: Double?
     let distanceKm: Double?
+    let pickupLat: Double?
+    let pickupLng: Double?
 }
 
 class WebSocketService: ObservableObject {
@@ -114,7 +116,9 @@ class WebSocketService: ObservableObject {
                     fare: estimatedFare,
                     customerName: eventData["customer_name"] as? String,
                     customerRating: eventData["customer_rating"] as? Double,
-                    distanceKm: eventData["distance_km"] as? Double
+                    distanceKm: eventData["distance_km"] as? Double,
+                    pickupLat: parseDouble(eventData["pickup_lat"]),
+                    pickupLng: parseDouble(eventData["pickup_lng"])
                 )
 
                 DispatchQueue.main.async {
@@ -124,6 +128,13 @@ class WebSocketService: ObservableObject {
         } catch {
             print("WebSocket JSON decoding error: \(error.localizedDescription)")
         }
+    }
+
+    private func parseDouble(_ value: Any?) -> Double? {
+        if let number = value as? Double { return number }
+        if let number = value as? NSNumber { return number.doubleValue }
+        if let text = value as? String { return Double(text) }
+        return nil
     }
 
     func sendGoOnline(driverId: String) {
